@@ -2,15 +2,15 @@
 import hashlib
 import requests
 import os
-import smtplib
+# import smtplib
 from dotenv import load_dotenv
-from email.message import EmailMessage
+from datetime import datetime
+# from email.message import EmailMessage
 from notifier import Notifier
-import json
 
 load_dotenv()
 
-URL = os.getenv("MONITOR_URL")
+URL = os.environ.get("MONITOR_URL")
 HASH_FILE = "last_hash.txt"
 
 
@@ -60,8 +60,8 @@ def main():
     if not URL:
         raise SystemExit("Set MONITOR_URL environment variable.")
     
-    TG_TOKEN = os.getenv("TELEGRAM_TOKEN")
-    TG_CHAT = os.getenv("TELEGRAM_CHAT_ID")
+    TG_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+    TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID")
 
     notifier = Notifier(TG_TOKEN, TG_CHAT)
 
@@ -71,12 +71,13 @@ def main():
     last = read_last_hash()
     if h != last:
         print("Change detected!")
-        subject = f"Change detected on {URL}"
-        body = f"The content at {URL} changed.\n\nHash: {h}\n\nYou should check the page: {URL}"
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        message = f"🔔 Change detected!\n\nURL: {URL}\nTime: {timestamp}"
+        # body = f"The content at {URL} changed.\n\nHash: {h}\n\nYou should check the page: {URL}"
 
         # send notifications you configured:
         try:
-            notifier.send_telegram(body)
+            notifier.send_telegram(message)
         except Exception as e:
             print("Telegram failed:", e)
 
