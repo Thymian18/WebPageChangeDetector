@@ -2,8 +2,8 @@ name: Website Monitor
 
 on:
   schedule:
-    # every 10 minutes (GitHub's minimum reliable interval)
-    - cron: "*/15 * * * *"
+    # every hour (GitHub's minimum reliable interval)
+    - cron: "0 * * * *"
   workflow_dispatch: {} # allows manual run
 
 jobs:
