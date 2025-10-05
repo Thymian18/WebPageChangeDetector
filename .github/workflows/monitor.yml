@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          git add hashes || true
+          git add last_hash.txt || true
           git commit -m "Update hash files" || echo "No changes to commit"
           git push
         env:
