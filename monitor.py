@@ -1,6 +1,7 @@
 # monitor.py
 import hashlib
 import requests
+import pytz
 import os
 # import smtplib
 # from dotenv import load_dotenv
@@ -71,7 +72,7 @@ def main():
     last = read_last_hash()
     if h != last:
         print("Change detected!")
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.now(pytz.timezone('Europe/Zurich')).strftime("%Y-%m-%d %H:%M:%S")
         message = f"🔔 Change detected!\n\nURL: {URL}\nTime: {timestamp}"
         # body = f"The content at {URL} changed.\n\nHash: {h}\n\nYou should check the page: {URL}"
 
