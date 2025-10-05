@@ -3,12 +3,12 @@ import hashlib
 import requests
 import os
 # import smtplib
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from datetime import datetime
 # from email.message import EmailMessage
 from notifier import Notifier
 
-load_dotenv()
+# load_dotenv()
 
 URL = os.environ.get("MONITOR_URL")
 HASH_FILE = "last_hash.txt"
